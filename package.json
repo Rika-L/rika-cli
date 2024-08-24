@@ -15,8 +15,11 @@
   "license": "ISC",
   "dependencies": {
     "@inquirer/prompts": "^5.3.8",
+    "@rika_/git-clone": "^1.0.1",
     "axios": "^1.7.5",
     "commander": "^12.1.0",
-    "ora": "^8.0.1"
+    "ncp": "^2.0.0",
+    "ora": "^8.0.1",
+    "rimraf": "^6.0.1"
   }
 }
