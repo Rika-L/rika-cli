@@ -1,8 +1,9 @@
-import {fetchRepoLists} from './common.js';
+import {fetchRepoLists, fnLoadingByOra} from './common.js';
 import {select} from '@inquirer/prompts';
+import ora from "ora";
 
 export async function createProject(projectName) {
-    let repos = await fetchRepoLists()
+    let repos = await fnLoadingByOra(fetchRepoLists,'加载模板中')
     let list = repos.map(item => item.name)
     list = list.map(item => ({
         name: item,
