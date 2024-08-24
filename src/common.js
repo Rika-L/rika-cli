@@ -36,7 +36,6 @@ async function downDir(repo) {
 async function copyTempToTarget(repo, projectName) {
     let dest = `${DOWNLOAD_DIRECTORY}/${repo}`;
     const resolvePath = path.join(path.resolve(), projectName);
-    rimrafSync(resolvePath)
     await ncp(dest, resolvePath);
 }
 
