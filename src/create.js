@@ -14,8 +14,6 @@ export async function createProject(projectName) {
         message: '请选择一个项目模板',
         choices: list
     });
-    console.log(answer);
-    console.log(DOWNLOAD_DIRECTORY);
     await fnLoadingByOra(downDir, '下载项目中...', answer);
     await fnLoadingByOra(copyTempToTarget, '移动项目至指定位置', answer, projectName)
 }
