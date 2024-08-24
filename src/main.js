@@ -1,7 +1,8 @@
 import {program} from "commander";
 import {createProject} from "./create.js";
+import chalk from 'chalk';
 
-console.log('\n' +
+console.log(chalk.cyan('\n' +
     '         _                _              _                 _          \n' +
     '        /\\ \\             /\\ \\           /\\_\\              / /\\        \n' +
     '       /  \\ \\            \\ \\ \\         / / /  _          / /  \\       \n' +
@@ -13,7 +14,7 @@ console.log('\n' +
     ' / / /\\ \\ \\      ___/ / /__      / / /  \\ \\ \\      / /_________/\\ \\ \\ \n' +
     '/ / /  \\ \\ \\    /\\__\\/_/___\\    / / /    \\ \\ \\    / / /_       __\\ \\_\\\n' +
     '\\/_/    \\_\\/    \\/_________/    \\/_/      \\_\\_\\   \\_\\___\\     /____/_/\n' +
-    '                                                                      \n')
+    '                                                                      \n'))
 
 program.command('*')
     .alias('')
