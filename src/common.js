@@ -1,13 +1,17 @@
-import {DOWNLOAD_DIRECTORY, GIT_URL} from "./constant.js";
+import {DOWNLOAD_DIRECTORY, GITHUB_URL,GITEE_URL} from "./constant.js";
 import axios from "axios";
 import ora from "ora";
 import {gitClonePromise} from '@rika_/git-clone'
-import {rimraf, rimrafSync} from 'rimraf'
+import {rimraf} from 'rimraf'
 import path from "node:path";
-import ncp from "ncp";
 
-async function fetchRepoLists() {
-    const {data} = await axios.get(GIT_URL)
+async function fetchRepoListsByGitHub() {
+    const {data} = await axios.get(GITHUB_URL)
+    return data
+}
+
+async function fetchRepoListsByGitEE() {
+    const {data} = await axios.get(GITEE_URL)
     return data
 }
 
@@ -21,22 +25,34 @@ const fnLoadingByOra = async (fn, message, ...args) => {
 }
 
 
-async function downDir(repo) {
+async function downDirByGitee(repo, projectName) {
     let dest = `${DOWNLOAD_DIRECTORY}/${repo}`;
     // 下载文件的路径
     await rimraf(dest)
+    const resolvePath = path.join(path.resolve(), projectName);
     try {
-        await gitClonePromise(`git@github.com:rika-template/${repo}.git`, dest)
-        await rimraf(dest + '/.git')
+        // await gitClonePromise(`git@github.com:rika-template/${repo}.git`, resolvePath)
+        await gitClonePromise(`https://gitee.com/rika-template/${repo}.git`, resolvePath)
+        await rimraf(resolvePath + '/.git')
     } catch (e) {
-        console.log(e);
+        console.log('下载失败')
+        process.exit(0)
     }
 }
 
-async function copyTempToTarget(repo, projectName) {
+async function downDirByGitHub(repo, projectName) {
     let dest = `${DOWNLOAD_DIRECTORY}/${repo}`;
+    // 下载文件的路径
+    await rimraf(dest)
     const resolvePath = path.join(path.resolve(), projectName);
-    await ncp(dest, resolvePath);
+    try {
+        await gitClonePromise(`https://github.com/rika-template/${repo}.git`, resolvePath)
+        // await gitClonePromise(`https://gitee.com/rika-template/${repo}.git`, resolvePath)
+        await rimraf(resolvePath + '/.git')
+    } catch (e) {
+        console.log('下载失败')
+        process.exit(0)
+    }
 }
 
-export {fetchRepoLists, fnLoadingByOra, downDir, copyTempToTarget}
+export {fetchRepoListsByGitEE,fetchRepoListsByGitHub, fnLoadingByOra, downDirByGitee, downDirByGitHub}
