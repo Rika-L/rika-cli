@@ -1,7 +1,7 @@
 {
   "name": "rika-cli",
   "version": "1.0.9",
-  "description": "",
+  "description": "a cli to clone project template",
   "main": "index.js",
   "type": "module",
   "bin": {
@@ -10,8 +10,18 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "cli","template","vue"
+  ],
+  "author": {
+    "name": "Rika",
+    "email": "rika00126@icloud.com",
+    "url": "https://rika-me.netlify.app/#/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Rika-L/rika-cli"
+  },
   "license": "ISC",
   "dependencies": {
     "@inquirer/prompts": "^5.3.8",
